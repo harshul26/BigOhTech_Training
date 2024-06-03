@@ -1,1 +1,15 @@
+let calculator = (num1, num2, operator) => {
+    if (operator == "sum") {
+        return num1 + num2;
+    } else if (operator == "subtract") {
+        return num1 - num2;
+    } else if (operator == "multiply") {
+        return num1 * num2;
+    } else if (operator == "divide") {
+        return num1 / num2;
+    } else {
+        return "input valid operation";
+    }
+};
 
+console.log(calculator(2, 5, "multiply"));
