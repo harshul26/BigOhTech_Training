@@ -1,1 +1,125 @@
+let calculator = (operation, ...number) => {
+    if (operation == power) {
+        let x = number[0],
+            y = number[1];
+        return operation(x, y);
+    } else
+        return operation(number);
+};
 
+let addition = (numbers) => {
+    return numbers.reduce((sum, i) => {
+        sum + i;
+    });
+}
+
+let subtraction = (numbers) => {
+    return numbers.reduce((sub, i) => {
+        sub - i;
+    });
+}
+
+let multiplication = (numbers) => {
+    return numbers.reduce((product, i) => {
+        product * i;
+    });
+}
+
+let division = (numbers) => {
+    return numbers.reduce((division, i) => {
+        division * i;
+    });
+}
+
+let square = (numbers) => {
+
+    return numbers.map((element, index) => {
+        element * element;
+    });
+}
+
+let squareRoot = (numbers) => {
+
+    return numbers.map((number, index) => {
+        let start = 0,
+            end = number,
+            mid, ans;
+
+        while (start <= end) {
+            mid = Math.floor((start + end) / 2);
+
+            if (mid * mid == number) {
+                ans = mid;
+                break;
+            } else if (mid * mid < number) {
+                ans = mid;
+                start = mid + 1;
+            } else if (mid * mid > number) {
+                end = mid - 1;
+            }
+        }
+
+        let increment = 0.1;
+
+        for (let i = 0; i < 2; i++) {
+            while (ans * ans <= number) {
+
+                ans += increment;
+            }
+
+            ans -= increment;
+            increment /= 10;
+        }
+
+        return ans;
+    });
+
+}
+
+let log = (numbers) => {
+    return numbers.map((number, index) => {
+        return Math.log10(number);
+    });
+
+}
+
+let ln = (numbers) => {
+    return numbers.map((number, index) => {
+        return Math.log(number);
+    });
+
+}
+
+let sin = (numbers) => {
+    return numbers.map((number, index) => {
+        return Math.sin(number);
+    });
+
+}
+
+let cos = (numbers) => {
+    return numbers.map((number, index) => {
+        return Math.cos(number);
+    });
+
+}
+
+let tan = (numbers) => {
+    return numbers.map((number, index) => {
+        return Math.tan(number);
+    });
+
+}
+
+let power = (x, y) => {
+    return Math.pow(x, y);
+}
+
+let areaOfCircle = (radius) => {
+    return numbers.map((number, index) => {
+        return (4 * 3.14 * square(radius));
+    });
+
+}
+
+console.log(calculator(2, square));
