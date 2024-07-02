@@ -1,4 +1,3 @@
-
 /* styles.css */
 
 body {
@@ -9,19 +8,25 @@ body {
 }
 
 header {
+    position: sticky;
+    top: 0;
     background-color: #333;
-    color: white;
+    color: rgb(4, 0, 0);
     padding: 10px 20px;
+    z-index: 1000;
+    background-color: rgb(148, 96, 60);
+    /* Ensure header stays above other content */
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: rgb(149, 96, 58);
 }
 
 #search-bar {
-    width: 70%;
+    width: 90%;
     padding: 5px;
     font-size: 16px;
 }
@@ -29,6 +34,25 @@ nav {
 #search-btn {
     padding: 5px 10px;
     font-size: 16px;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+    margin-bottom: 10px;
+    background-color: rgb(149, 96, 58);
+    align-items: center;
+}
+
+.pagination select {
+    margin-left: 10px;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    margin-left: 5px;
 }
 
 #categories {
@@ -66,39 +90,9 @@ nav {
     height: auto;
 }
 
-#load-more-btn {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
-
-#load-more-btn:hover {
-    background-color: #0056b3;
-}
-
 footer {
     display: flex;
     justify-content: space-between;
     padding: 10px 20px;
     background-color: #f4f4f4;
-}
-
-#pagination {
-    display: flex;
-    align-items: center;
-}
-
-#limit-select {
-    margin-right: 10px;
-}
-
-#page-controls button {
-    padding: 5px 10px;
-    margin-left: 5px;
 }
