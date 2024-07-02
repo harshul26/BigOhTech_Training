@@ -1,4 +1,4 @@
-// scripts.js
+// script.js
 
 document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = 'https://dummyjson.com';
@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtnTop.addEventListener('click', () => changePage(1));
     window.addEventListener('scroll', handleScroll);
 
+
     function fetchCategories() {
         fetch(`${apiUrl}/products/categories`)
             .then(response => response.json())
@@ -37,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 categories.forEach(category => {
                     const categoryDiv = document.createElement('div');
                     categoryDiv.textContent = category['name'];
-                    categoryDiv.addEventListener('click', () => fetchProductsByCategory(category['name']));
+                    categoryDiv.addEventListener('click', () => fetchProductsByCategory(category['slug']));
                     categoriesSection.appendChild(categoryDiv);
                 });
             })
@@ -46,10 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function fetchProducts(limit, skip, category = '', append = false) {
         isFetching = true;
-        let url = `${apiUrl}/products?limit=${limit}&skip=${skip}`;
+        let url = `${apiUrl}/products`;
         if (category) {
-            url += `&category=${category}`;
+            url += `/category/${category}`;
         }
+        url += `?limit=${limit}&skip=${skip}`;
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -120,12 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateLimit() {
-        limit = parseInt(limitSelect.value, 10);
+        limit = +limitSelect.value, 10;
         fetchProducts(limit, 0, currentCategory);
     }
 
     function changePage(direction) {
-        if (currentPage < 1) {
+        if (currentPage <= 1) {
             prevBtn.disabled = true;
         } else {
             prevBtn.disabled = false;
@@ -148,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pageNumberTop.textContent = `${currentPage}`;
 
         // Clear previous pagination numbers
-        paginationNumbers.innerHTML = '';
+        //paginationNumbers.innerHTML = '';
         paginationNumbersTop.innerHTML = '';
 
         const totalPages = Math.ceil(totalProducts / limit);
@@ -166,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pageLink.textContent = i;
             pageLink.style.cursor = 'pointer';
             pageLink.addEventListener('click', () => goToPage(i));
-            paginationNumbers.appendChild(pageLink.cloneNode(true));
+            //paginationNumbers.appendChild(pageLink.cloneNode(true));
             paginationNumbersTop.appendChild(pageLink);
         }
     }
