@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <input type="text" id="search-bar" placeholder="Search for products...">
+            <button id="search-btn">Search</button>
+        </nav>
+    </header>
+    <main>
+        <section id="categories">
+            <!-- Categories will be dynamically populated here -->
+        </section>
+        <section id="product-list">
+            <!-- Product cards will be dynamically populated here -->
+        </section>
+        <button id="load-more-btn">Load More</button>
+    </main>
+    <footer>
+        <div id="pagination">
+            <select id="limit-select">
+                <option value="10">10</option>
+                <option value="20" selected>20</option>
+                <option value="50">50</option>
+            </select>
+            <div id="page-controls">
+                <button id="prev-btn">Previous</button>
+                <button id="next-btn">Next</button>
+            </div>
+        </div>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+
+</html>
