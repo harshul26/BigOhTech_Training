@@ -15,20 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const limitSelect = document.getElementById('limit-select');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
-    const prevBtnTop = document.getElementById('prev-btn-top');
-    const nextBtnTop = document.getElementById('next-btn-top');
     const pageNumber = document.getElementById('page-number');
-    const pageNumberTop = document.getElementById('page-number-top');
+    const parentProduct = document.getElementById('product-parent');
     const paginationNumbers = document.getElementById('pagination-numbers');
-    const paginationNumbersTop = document.getElementById('pagination-numbers-top');
 
     searchBtn.addEventListener('click', searchProduct);
     limitSelect.addEventListener('change', updateLimit);
     prevBtn.addEventListener('click', () => changePage(-1));
     nextBtn.addEventListener('click', () => changePage(1));
-    prevBtnTop.addEventListener('click', () => changePage(-1));
-    nextBtnTop.addEventListener('click', () => changePage(1));
-    window.addEventListener('scroll', handleScroll);
+
+    parentProduct.addEventListener('scroll', handleScroll);
 
 
     function fetchCategories() {
@@ -101,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             productCard.addEventListener('click', () => fetchProductDetails(product.id));
             productList.appendChild(productCard);
         });
+
     }
 
     function fetchProductDetails(id) {
@@ -139,19 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleScroll() {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500 && !isFetching) {
+        const { scrollTop, scrollHeight, clientHeight } = parentProduct;
+        if (scrollTop + clientHeight >= scrollHeight - 50 && !isFetching) {
             currentPage++;
             fetchProducts(limit, (currentPage - 1) * limit, currentCategory, true);
         }
     }
 
     function updatePagination() {
-        //pageNumber.textContent = ` ${currentPage}`;
-        pageNumberTop.textContent = `${currentPage}`;
+        pageNumber.textContent = `${currentPage}`;
 
         // Clear previous pagination numbers
-        //paginationNumbers.innerHTML = '';
-        paginationNumbersTop.innerHTML = '';
+        paginationNumbers.innerHTML = '';
 
         const totalPages = Math.ceil(totalProducts / limit);
         const maxVisiblePages = 5; // Number of visible page numbers
@@ -168,8 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pageLink.textContent = i;
             pageLink.style.cursor = 'pointer';
             pageLink.addEventListener('click', () => goToPage(i));
-            //paginationNumbers.appendChild(pageLink.cloneNode(true));
-            paginationNumbersTop.appendChild(pageLink);
+            paginationNumbers.appendChild(pageLink);
         }
     }
 
