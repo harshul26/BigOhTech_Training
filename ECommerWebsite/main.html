@@ -9,49 +9,40 @@
 </head>
 
 <body>
+
     <header>
         <nav>
             <input type="text" id="search-bar" placeholder="Search for products...">
             <button id="search-btn">Search</button>
         </nav>
-        <div id="pagination-top" class="pagination">
-            <div id="pagination-numbers-top"></div>
+
+    </header>
+    <main>
+        <section id="categories">
+            <!-- Categories will be dynamically populated here -->
+        </section>
+        <section id="product-parent">
+            <div id="product-list"></div>
+            <!-- Product cards will be dynamically populated here -->
+        </section>
+    </main>
+    <footer>
+        <div id="pagination" class="pagination">
+            <div id="pagination-numbers"></div>
 
             <select id="limit-select">
                 <option value="10">10</option>
                 <option value="20" selected>20</option>
                 <option value="50">50</option>
             </select>
-            <div id="page-controls-top">
-                <button id="prev-btn-top">Previous</button>
-                <button id="page-number-top"></button>
-                <button id="next-btn-top">Next</button>
-            </div>
-        </div>
-    </header>
-    <main>
-        <section id="categories">
-            <!-- Categories will be dynamically populated here -->
-        </section>
-        <section id="product-list">
-            <!-- Product cards will be dynamically populated here -->
-        </section>
-    </main>
-    <footer>
-        <div id="pagination">
-            <!-- <div id="pagination-numbers"></div> -->
-            <!-- <span id="page-number"></span> -->
-            <!-- <select id="limit-select">
-                <option value="10"></option>
-                <option value="20" selected></option>
-                <option value="50"></option>
-            </select> -->
             <div id="page-controls">
-                <button id="prev-btn"></button>
-                <button id="next-btn"></button>
+                <button id="prev-btn">Previous</button>
+                <button id="page-number"></button>
+                <button id="next-btn">Next</button>
             </div>
         </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 
