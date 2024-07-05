@@ -1,5 +1,3 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = 'https://dummyjson.com';
     let currentPage = 1;
@@ -23,9 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     limitSelect.addEventListener('change', updateLimit);
     prevBtn.addEventListener('click', () => changePage(-1));
     nextBtn.addEventListener('click', () => changePage(1));
-
     parentProduct.addEventListener('scroll', handleScroll);
-
 
     function fetchCategories() {
         fetch(`${apiUrl}/products/categories`)
@@ -88,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         products.forEach(product => {
             const productCard = document.createElement('div');
             productCard.className = 'product-card';
+            productCard.dataset.page = Math.ceil((productList.children.length + 1) / limit); // Track which page the product belongs to
             productCard.innerHTML = `
                 <img src="${product.thumbnail}" alt="${product.title}">
                 <h3>${product.title}</h3>
@@ -97,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             productCard.addEventListener('click', () => fetchProductDetails(product.id));
             productList.appendChild(productCard);
         });
-
+        observeProductCards();
     }
 
     function fetchProductDetails(id) {
@@ -124,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function changePage(direction) {
-        if (currentPage <= 1) {
+        if (currentPage < 1) {
             prevBtn.disabled = true;
         } else {
             prevBtn.disabled = false;
@@ -142,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchProducts(limit, (currentPage - 1) * limit, currentCategory, true);
         }
     }
+
 
     function updatePagination() {
         pageNumber.textContent = `${currentPage}`;
@@ -163,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const pageLink = document.createElement('button');
             pageLink.textContent = i;
             pageLink.style.cursor = 'pointer';
+            pageLink.className = (i === currentPage) ? 'active' : '';
             pageLink.addEventListener('click', () => goToPage(i));
             paginationNumbers.appendChild(pageLink);
         }
@@ -173,6 +172,33 @@ document.addEventListener('DOMContentLoaded', () => {
             currentPage = page;
             fetchProducts(limit, (currentPage - 1) * limit, currentCategory);
         }
+    }
+
+    function observeProductCards() {
+        const options = {
+            root: parentProduct,
+            rootMargin: '0px',
+            threshold: 0.5 // Adjust this as necessary
+        };
+
+        const callback = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const visibleProductCard = entry.target;
+                    const visiblePage = parseInt(visibleProductCard.dataset.page, 10);
+                    if (visiblePage !== currentPage) {
+                        currentPage = visiblePage;
+                        updatePagination();
+                    }
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(callback, options);
+
+        document.querySelectorAll('.product-card').forEach(card => {
+            observer.observe(card);
+        });
     }
 
     // Initial fetch
