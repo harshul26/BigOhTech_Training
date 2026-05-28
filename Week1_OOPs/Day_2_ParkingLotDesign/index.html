@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parking Lot System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Parking Lot System</h1>
+
+        <input type="text" id="vehicleNumber"
+               placeholder="Enter Vehicle Number">
+
+        <select id="vehicleType">
+            <option value="Car">Car</option>
+            <option value="Truck">Truck</option>
+            <option value="Motorcycle">Motorcycle</option>
+        </select>
+
+        <button onclick="parkVehicle()">
+            Park Vehicle
+        </button>
+
+        <h2>Parking Status</h2>
+
+        <div id="parkingArea"></div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
